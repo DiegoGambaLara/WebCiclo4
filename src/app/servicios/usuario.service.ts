@@ -16,15 +16,18 @@ export class UsuarioService {
     private seguridadService: SeguridadService) { 
       this.token = this.seguridadService.getToken();
     }
+    
     //Crear un usuario
     store(usuario: UsuarioModel): Observable<UsuarioModel> {
       return this.http.post<UsuarioModel>(`${this.url}/usuarios`, {
         nombre: usuario.nombre,
         apellidos: usuario.apellidos,
         telefono: usuario.telefono,
-        correo: usuario.correo
+        correo: usuario.correo,
+        password: ''
       });
     }
+    
     //Obtiene todos los usuarios
     getAll(): Observable<UsuarioModel[]>{
       return this.http.get<UsuarioModel[]>(`${this.url}/usuarios`, {
