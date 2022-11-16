@@ -16,6 +16,7 @@ export class ClienteService {
     private seguridadService: SeguridadService) { 
       this.token = this.seguridadService.getToken();
     }
+    
     //Crear un cliente
     store(cliente: ClienteModel): Observable<ClienteModel> {
       return this.http.post<ClienteModel>(`${this.url}/clientes`, cliente, {

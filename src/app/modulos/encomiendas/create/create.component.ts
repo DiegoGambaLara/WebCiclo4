@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
     encomienda.presentacion = this.fgValidacion.controls["presentacion"].value as string;
  
     this.encomiendaService.store(encomienda).subscribe((data: EncomiendaModel)=> {
-      Swal.fire('Creado correctamente!', '', 'success')
+      Swal.fire('Encomienda Creada Correctamente!', '', 'success')
       this.router.navigate(['/encomiendas/get']);
     },
     (error: any) => {

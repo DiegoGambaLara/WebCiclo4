@@ -16,6 +16,7 @@ export class EncomiendaService {
     private seguridadService: SeguridadService) { 
       this.token = this.seguridadService.getToken();
     }
+    
     //Crear una encomienda
     store(encomienda: EncomiendaModel): Observable<EncomiendaModel> {
       return this.http.post<EncomiendaModel>(`${this.url}/encomiendas`,encomienda, {
