@@ -1,1 +1,32 @@
-<p>create works!</p>
+<div class="container">
+    <h3 class="center-align">Registrar Encomienda</h3>
+    <form [formGroup]="fgValidacion" class="col s12" (ngSubmit)="store()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="descripcion" type="text" class="validate">
+          <label for="descripcion">Descripción</label>
+        </div>
+        <div class="input-field col s6">
+          <input formControlName="peso" type="text" class="validate">
+          <label for="peso">Peso</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="tipo" type="text" class="validate">
+          <label for="tipo">Tipo</label>
+        </div>
+        <div class="input-field col s6">
+            <input formControlName="presentacion" type="text" class="validate">
+            <label for="presentacion">Presentación</label>
+          </div>
+      </div>
+   
+      <div class="row center-align">
+        <button [disabled]="!fgValidacion.valid" class="btn waves-effect waves-light" type="submit" name="action">Enviar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
+  </div>
+

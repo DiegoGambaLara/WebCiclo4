@@ -18,12 +18,16 @@ export class EncomiendaService {
     }
     //Crear una encomienda
     store(encomienda: EncomiendaModel): Observable<EncomiendaModel> {
-      return this.http.post<EncomiendaModel>(`${this.url}/encomiendas`, {
-        descripcion: encomienda.descripcion,
+      return this.http.post<EncomiendaModel>(`${this.url}/encomiendas`,encomienda, {
+        headers: new HttpHeaders({
+          "Authorization": `Bearer ${this.token}`
+        })
+      /*  descripcion: encomienda.descripcion,
         peso: encomienda.peso,
         tipo: encomienda.tipo,
-        presentacion: encomienda.presentacion
+        presentacion: encomienda.presentacion*/
       });
+      
     }
     //Obtiene todas las encomiendas
     getAll(): Observable<EncomiendaModel[]>{

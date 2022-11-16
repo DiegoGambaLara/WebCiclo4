@@ -18,8 +18,11 @@ export class ClienteService {
     }
     //Crear un cliente
     store(cliente: ClienteModel): Observable<ClienteModel> {
-      return this.http.post<ClienteModel>(`${this.url}/clientes`, {
-        cedula: cliente.cedula,
+      return this.http.post<ClienteModel>(`${this.url}/clientes`, cliente, {
+        headers: new HttpHeaders({
+          "Authorization": `Bearer ${this.token}`
+        })
+        /*cedula: cliente.cedula,
         nombre: cliente.nombre,
         apellidos: cliente.apellidos,
         pais: cliente.pais,
@@ -27,7 +30,7 @@ export class ClienteService {
         departamento: cliente.departamento,
         direccion: cliente.direccion,
         telefono: cliente.telefono,
-        correo: cliente.correo
+        correo: cliente.correo*/
       });
     }
 

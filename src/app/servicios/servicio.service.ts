@@ -18,13 +18,16 @@ export class ServicioService {
     }
     //Crear un servicio
     store(servicio: ServicioModel): Observable<ServicioModel> {
-      return this.http.post<ServicioModel>(`${this.url}/servicios`, {
-        origen: servicio.origen,
+      return this.http.post<ServicioModel>(`${this.url}/servicios`, servicio, {
+        headers: new HttpHeaders({
+          "Authorization": `Bearer ${this.token}`
+        })
+        /*origen: servicio.origen,
         destino: servicio.destino,
         fecha: servicio.fecha,
         hora: servicio.hora,
         encomienda: servicio.encomienda,
-        valor: servicio.valor
+        valor: servicio.valor*/
         
       });
     }
