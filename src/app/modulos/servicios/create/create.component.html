@@ -3,12 +3,16 @@
     <form [formGroup]="fgValidacion" class="col s12" (ngSubmit)="store()">
       <div class="row">
         <div class="input-field col s6">
-          <input formControlName="origen" type="text" class="validate">
-          <label for="origen">Origen</label>
+          <select class="browser-default" formControlName="origen" >
+            <option value="" disabled selected>Seleccione el cliente origen</option>
+            <option *ngFor="let cliente of listadoClientes" value="{{cliente.nombre}} - {{cliente.apellidos}}">{{cliente.nombre}} - {{cliente.apellidos}}</option>
+          </select>
         </div>
         <div class="input-field col s6">
-          <input formControlName="destino" type="text" class="validate">
-          <label for="destino">Destino</label>
+          <select class="browser-default" formControlName="destino" >
+            <option value="" disabled selected>Seleccione el cliente destino</option>
+            <option *ngFor="let cliente of listadoClientes" value="{{cliente.nombre}} - {{cliente.apellidos}}">{{cliente.nombre}} - {{cliente.apellidos}}</option>
+          </select>
         </div>
       </div>
       <div class="row">
@@ -22,9 +26,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
-          <input formControlName="encomienda" type="text" class="validate">
-          <label for="encomienda">Encomienda</label>
+        <div class="input-field col s12">
+          <select class="browser-default" formControlName="encomienda" >
+            <option value="" disabled selected>Seleccione la encomienda</option>
+            <option *ngFor="let encomienda of listadoEncomiendas" value="{{encomienda.descripcion}}">{{encomienda.descripcion}}</option>
+          </select>
         </div>
         <div class="input-field col s6">
           <input formControlName="valor" type="text" class="validate">
