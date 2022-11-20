@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioModel } from 'src/app/modelos/servicio.model';
+import { ClienteModel } from 'src/app/modelos/cliente.model';
+import { EncomiendaModel } from 'src/app/modelos/encomienda.model';
+import { ClienteService } from 'src/app/servicios/cliente.service';
+import { EncomiendaService } from 'src/app/servicios/encomienda.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import Swal from 'sweetalert2'
 
@@ -15,6 +19,8 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private servicioService: ServicioService,
     private router: Router,
+    private clienteService: ClienteService,
+    private encomiendaService: EncomiendaService,
     private route: ActivatedRoute) { }
 
     fgValidacion = this.fb.group({
@@ -25,12 +31,17 @@ export class EditComponent implements OnInit {
       hora: ['', [Validators.required]],
       encomienda: ['', [Validators.required]],
       valor: ['', [Validators.required]],
-    });
+    });  
 
   ngOnInit(): void {
     let id = this.route.snapshot.params["id"]
     this.getWithId(id)
+    this.getEncomiendas();
+    this.getClientes();
   }
+
+  listadoClientes: ClienteModel[] = []
+  listadoEncomiendas: EncomiendaModel[] = []
 
   getWithId(id: string){
     this.servicioService.getWithId(id).subscribe((data: ServicioModel) => {
@@ -43,6 +54,20 @@ export class EditComponent implements OnInit {
       this.fgValidacion.controls["encomienda"].setValue (data.encomienda as string)
       this.fgValidacion.controls["valor"].setValue (data.valor as string)
       })
+  }
+
+  getEncomiendas(){
+    this.encomiendaService.getAll().subscribe((data: EncomiendaModel[]) => {
+      this.listadoEncomiendas = data
+      console.log(data)
+    })
+  }
+
+  getClientes(){
+    this.clienteService.getAll().subscribe((data: ClienteModel[]) => {
+      this.listadoClientes = data
+      console.log(data)
+    })
   }
 
   edit(){
